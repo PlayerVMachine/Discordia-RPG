@@ -1,0 +1,24 @@
+{
+  "name": "discordia-rpg",
+  "version": "1.0.0",
+  "description": "Discord RPG adventure",
+  "main": "index.js",
+  "dependencies": {
+    "eris": "^0.8.6",
+    "jimp": "^0.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PlayerVMachine/Discordia-RPG.git"
+  },
+  "author": "PlayerVMachine",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PlayerVMachine/Discordia-RPG/issues"
+  },
+  "homepage": "https://github.com/PlayerVMachine/Discordia-RPG#readme"
+}
