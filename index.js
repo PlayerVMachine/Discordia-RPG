@@ -6,6 +6,19 @@ const path = require('path');
 //node_modules
 const jimp = require('jimp');
 
+jimp.read('./assets/base/challenger.png', (err, image) => {
+    if (err)
+        throw err;
+
+    image.greyscale()
+
+    jimp.loadFont('./assets/basefont.ttf').then(font => {
+        image.print(font, 20, 20, 'Congratulations');
+    });
+
+    image.write('./assets/comp/challenger.png');
+});
+
 http.createServer((req, res) => {
     console.log(`${req.method} ${req.url}`);
 
@@ -23,14 +36,6 @@ http.createServer((req, res) => {
         '.mp3': 'audio/mpeg',
         '.pdf': 'application/pdf',
     };
-
-    jimp.read('./assets/base/challenger.png', (err, image) => {
-        if (err)
-            throw err;
-
-        image.greyscale()
-        .write('./assets/comp/challenger.png');
-    });
 
     fs.exists(pathname, (exist) => {
         if(!exist) {
