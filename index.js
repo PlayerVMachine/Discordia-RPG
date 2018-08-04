@@ -12,7 +12,7 @@ jimp.read('./assets/base/challenger.png', (err, image) => {
 
     image.greyscale()
 
-    jimp.loadFont('./assets/font.fnt').then(font => {
+    jimp.loadFont('./assets/fonts/open-sans/open-sans-16-white/open-sans-16-white.fnt').then(font => {
         image.print(font, 20, 20, 'Congratulations');
     });
 
