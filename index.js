@@ -13,10 +13,11 @@ jimp.read('./assets/base/challenger.png', (err, image) => {
     image.greyscale()
 
     jimp.loadFont('./assets/fonts/open-sans/open-sans-16-white/open-sans-16-white.fnt').then(font => {
-        image.print(font, 200, 20, 'Congratulations');
+        image.print(font, 20, 20, 'Congratulations');
+        image.write('./assets/comp/challenger.png');
     });
 
-    image.write('./assets/comp/challenger.png');
+
 });
 
 http.createServer((req, res) => {
