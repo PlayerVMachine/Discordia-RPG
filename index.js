@@ -3,6 +3,9 @@ const url = require('url');
 const fs = require('fs');
 const path = require('path');
 
+//node_modules
+const jimp = require('jimp');
+
 http.createServer((req, res) => {
     console.log(`${req.method} ${req.url}`);
 
@@ -20,6 +23,14 @@ http.createServer((req, res) => {
         '.mp3': 'audio/mpeg',
         '.pdf': 'application/pdf',
     };
+
+    jimp.read('./assets/base/challenger.png', (err, image) => {
+        if (err)
+            throw err;
+
+        image.greyscale()
+        .write('./assets/comp/challenger.png');
+    });
 
     fs.exists(pathname, (exist) => {
         if(!exist) {
