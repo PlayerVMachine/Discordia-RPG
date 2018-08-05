@@ -14,20 +14,14 @@ bot.on(`ready`, () => {
 
 //
 bot.on(`guildCreate`, async guild => {
-    let botmember = guild.members.get(bot.user.id);
-    let botperms = botmember.permission.allow;
-    let reqperms = 536870912 + 268435456 + 262144 + 16384 + 32768 + 2048 + 1024 + 64 + 16;
-
-    if (reqperms > botperms) {
-        //Bot is missing permissions
-        //tell owner perms are missing
-        return;
+    try {
+        //create game section
+        let gameCategory = await guild.createChannel(`Discordia`, 4, `Discordia RPG setup.`)
+        let gameLocale = await guild.createChannel(`Discordia Prime`, 0, `Discordia RPG setup.`, gameCategory.id)
+        let gameLexicon = await guild.createChannel(`Lexicon`, 0, `Discordia RPG setup.`, gameCategory.id)
+    } catch (err) {
+        console.log(err)
     }
-
-    //create game section
-    let gameCategory = await guild.createChannel(`Discordia`, 4, `Discordia RPG setup.`)
-    let gameLocale = await guild.createChannel(`Discordia Prime`, 0, `Discordia RPG setup.`, gameCategory.id)
-    let gameLexicon = await guild.createChannel(`Lexicon`, 0, `Discordia RPG setup.`, gameCategory.id)
 
 });
 
