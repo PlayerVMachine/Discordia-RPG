@@ -9,12 +9,12 @@ const bot = new eris.Client(config.BOT_TOKEN, {
 
 //Bot connected to Discord
 bot.on(`ready`, () => {
-    console.log(`The land of Discordia sprwals before the console...`);
+    console.log(`The land of Discordia sprawls before the console...`);
 });
 
 //
 bot.on(`guildCreate`, async guild => {
-    let botmember = guild.members.get(m => m.id = bot.user.id);
+    let botmember = guild.members.get(m => m.id == bot.user.id);
     let botperms = botmember.permission.allow;
     let reqperms = 536870912 + 268435456 + 262144 + 16384 + 32768 + 2048 + 1024 + 64 + 16;
 
