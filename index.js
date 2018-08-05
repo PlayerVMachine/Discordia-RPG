@@ -1,63 +1,35 @@
-const http = require('http');
-const url = require('url');
-const fs = require('fs');
-const path = require('path');
+const eris = require(`eris`)
 
-//node_modules
-const jimp = require('jimp');
+const config = require(`./config.json`)
 
-jimp.read('./assets/base/challenger.png', (err, image) => {
-    if (err)
-        throw err;
+const bot = new Eris.Client(config.BOT_TOKEN, {
+    messageLimit: 20,
+    defaultImageSize:256
+})
 
-    image.greyscale()
+//Bot connected to Discord
+bot.on(`ready`, () => {
+    console.log(`The land of Discordia sprwals before the console...`);
+});
 
-    jimp.loadFont('./assets/fonts/open-sans/open-sans-16-white/open-sans-16-white.fnt').then(font => {
-        image.print(font, 20, 20, 'Congratulations');
-        image.write('./assets/comp/challenger.png');
-    });
+//
+bot.on(`guildCreate`, async guild => {
+    let botmember = guild.members.get(m => m.id = bot.user.id);
+    let botperms = botmember.permission.allow;
+    let reqperms = 536870912 + 268435456 + 262144 + 16384 + 32768 + 2048 + 1024 + 64 + 16;
 
+    if (reqperms > botperms) {
+        //Bot is missing permissions
+        //tell owner perms are missing
+        return;
+    }
+
+    //create game section
+    let gameCategory = await guild.createChannel(`Discordia`, 4, `Discordia RPG setup.`)
+    let gameLocale = await guild.createChannel(`Discordia Prime`, 0, `Discordia RPG setup.`, gameCategory.id)
+    let gameLexicon = await guild.createChannel(`Lexicon`, 0, `Discordia RPG setup.`, gameCategory.id)
 
 });
 
-http.createServer((req, res) => {
-    console.log(`${req.method} ${req.url}`);
-
-    //parse URL
-    const parsedUrl = url.parse(req.url);
-    // extract URL path
-    const pathname = `.${parsedUrl.pathname}`;
-    // map file extensions to MIME types
-    const mimeType = {
-        '.ico': 'image/x-icon',
-        '.json': 'application/json',
-        '.png': 'image/png',
-        '.jpg': 'image/jpeg',
-        '.wav': 'audio/wav',
-        '.mp3': 'audio/mpeg',
-        '.pdf': 'application/pdf',
-    };
-
-    fs.exists(pathname, (exist) => {
-        if(!exist) {
-            // if the file is not found, return 404
-            res.statusCode = 404;
-            res.end(`File ${pathname} not found!`);
-            return;
-        }
-
-        // read file from file system
-        fs.readFile(pathname, (err, data) => {
-            if(err){
-                res.statusCode = 500;
-                res.end(`Error getting the file: ${err}.`);
-            } else {
-                // based on the URL path, extract the file extention. e.g. .js, .doc, ...
-                const ext = path.parse(pathname).ext;
-                // if the file is found, set Content-type and send data
-                res.setHeader('Content-type', mimeType[ext] || 'text/plain' );
-                res.end(data);
-            }
-        });
-    });
-}).listen(3000);
+//Connect to Discord
+bot.connect()
