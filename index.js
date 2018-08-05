@@ -2,7 +2,7 @@ const eris = require(`eris`)
 
 const config = require(`./config.json`)
 
-const bot = new Eris.Client(config.BOT_TOKEN, {
+const bot = new eris.Client(config.BOT_TOKEN, {
     messageLimit: 20,
     defaultImageSize:256
 })
