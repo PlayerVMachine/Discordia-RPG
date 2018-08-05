@@ -14,7 +14,7 @@ bot.on(`ready`, () => {
 
 //
 bot.on(`guildCreate`, async guild => {
-    let botmember = guild.members.get(m => m.id == bot.user.id);
+    let botmember = guild.members.get(bot.user.id);
     let botperms = botmember.permission.allow;
     let reqperms = 536870912 + 268435456 + 262144 + 16384 + 32768 + 2048 + 1024 + 64 + 16;
 
